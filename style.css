@@ -10,8 +10,31 @@
 .controls{
     position: absolute;
     z-index: 100;
+    width: 80%;
 }
 
 img{
     display: none;
+}
+
+button{
+    margin-top: 20px;
+    margin-right: 50%;
+    margin-left: 50%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 25px;
+    font-family: 'Montserrat';
+    color: white;
+    background-color: black;
+    transition: .3s;
+    border-radius: 10000px;
+}
+
+button:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
 }
