@@ -1,6 +1,9 @@
 const IMAGE_ID = 'image1';
 const CANVAS_ID = 'canvas1';
 const RESET_BTN = 'resetbutton';
+const ADD_LAYER_BTN = 'addlayer';
+
+var layers_count = 0;
 
 // editable settings
 var particle_size = 6;
@@ -128,6 +131,8 @@ function init() {
     ctx = canvas.getContext('2d');
     effect = new Effect(canvas.width, canvas.height);
     effect.init(ctx);
+    animate();
+    layers_count++;
 }
 
 // main function
@@ -143,7 +148,14 @@ function animate(){
 const resetBtn = document.getElementById(RESET_BTN);
 resetBtn.addEventListener('click', function(){
     init();
+    layers_count = 1;
+})
+
+//add layer button
+const addLayerBtn = document.getElementById(ADD_LAYER_BTN);
+addLayerBtn.addEventListener('click', function(){
+    effect.init(ctx);
+    layers_count++
 })
 
 init();
-animate();
