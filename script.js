@@ -122,24 +122,24 @@ class Effect{
 }
 
 const canvas = document.getElementById(CANVAS_ID);
-var ctx;
+var context;
 var effect;
 
 function init() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx = canvas.getContext('2d');
+    context = canvas.getContext('2d');
     effect = new Effect(canvas.width, canvas.height);
-    effect.init(ctx);
+    effect.init(context);
     animate();
     layers_count++;
 }
 
 // main function
 function animate(){
-    ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.beginPath();
-    effect.draw(ctx);
+    context.clearRect(0,0, canvas.width, canvas.height);
+    context.beginPath();
+    effect.draw(context);
     effect.update();
     requestAnimationFrame(animate);
 }
@@ -149,13 +149,25 @@ const resetBtn = document.getElementById(RESET_BTN);
 resetBtn.addEventListener('click', function(){
     init();
     layers_count = 1;
+    updateLayerCount(true);
 })
 
 //add layer button
 const addLayerBtn = document.getElementById(ADD_LAYER_BTN);
+
+function updateLayerCount(reset){
+    if(reset){
+        addLayerBtn.innerHTML = 'Add layer';
+    }
+    else{
+        layers_count++;
+        addLayerBtn.innerHTML = 'Add layer ' + layers_count;
+    }
+}
+
 addLayerBtn.addEventListener('click', function(){
-    effect.init(ctx);
-    layers_count++
+    effect.init(context);
+    updateLayerCount();
 })
 
 init();

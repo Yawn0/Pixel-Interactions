@@ -8,9 +8,10 @@
 }
 
 .controls{
+    display: flex;
     position: absolute;
     z-index: 100;
-    width: 80%;
+    width: 100%;
 }
 
 img{
@@ -19,8 +20,7 @@ img{
 
 button{
     margin-top: 20px;
-    margin-right: 50%;
-    margin-left: 50%;
+    margin-left: 10px;
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 5px;
@@ -30,7 +30,7 @@ button{
     color: white;
     background-color: black;
     transition: .3s;
-    border-radius: 10000px;
+    border-radius: 7px;
 }
 
 button:hover{
