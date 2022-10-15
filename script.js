@@ -1,6 +1,6 @@
 const IMAGE_ID = 'image1';
 const CANVAS_ID = 'canvas1';
-const WARP_BTN = 'warpbutton';
+const RESET_BTN = 'resetbutton';
 
 // editable settings
 var particle_size = 6;
@@ -9,8 +9,8 @@ var friction = 0.9;
 var pixel_gap = 0;          // number between 0 and (pixel size - 1);
 var force_multiplier = 1;   // can be negative
 var input_radius = 30000;
-var destruction_mode = true;  // do particles realign themselves
-var delay_mode = false;        // do particles realign with a delay
+var destruction_mode = false; // do particles realign themselves
+var delay_mode = false;       // do particles realign with a delay
 
 var zip_mode = false;
 var zip_mode_angle = 0;
@@ -62,10 +62,6 @@ class Particle{
             this.x += (this.vx *= this.friction) + (this.originX - this.x) * this.ease;
             this.y += (this.vy *= this.friction) + (this.originY - this.y) * this.ease;
         }
-    }
-    warp(){
-        this.x = Math.random() * this.effect.width;
-        this.y = Math.random() * this.effect.height;
     }
 }
 
@@ -120,19 +116,19 @@ class Effect{
     update(){
         this.particlesArray.forEach(particle => particle.update());
     }
-    warp(){
-        this.particlesArray.forEach(particle => particle.warp());
-    }
 }
 
 const canvas = document.getElementById(CANVAS_ID);
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+var ctx;
+var effect;
 
-var ctx = canvas.getContext('2d');
-
-const effect = new Effect(canvas.width, canvas.height);
-effect.init(ctx);
+function init() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    ctx = canvas.getContext('2d');
+    effect = new Effect(canvas.width, canvas.height);
+    effect.init(ctx);
+}
 
 // main function
 function animate(){
@@ -143,10 +139,11 @@ function animate(){
     requestAnimationFrame(animate);
 }
 
-// warp button
-const warpBtn = document.getElementById(WARP_BTN);
-warpBtn.addEventListener('click', function(){
-    effect.warp();
+//reset button
+const resetBtn = document.getElementById(RESET_BTN);
+resetBtn.addEventListener('click', function(){
+    init();
 })
 
+init();
 animate();
