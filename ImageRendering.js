@@ -94,13 +94,13 @@ class Effect{
         });
     }
     init(context){
-        
+
         context.drawImage(this.image, this.x, this.y);
         const pixels = context.getImageData(0, 0, this.width, this.height).data;
         
         for(let y = 0; y < this.height; y += this.size){
             for(let x = 0; x < this.width; x += this.size){
-                const index = (y * this.width + x) * 4; // pixel information has 4 information slots (rgba)
+                const index = (y * this.width + x) * 4; // pixel information has 4 position each (rgba)
                 const alpha = pixels[index + 3];
                 
                 if(alpha > 0){  // if alpha > 0 then pixel belongs to image
@@ -126,6 +126,7 @@ var context;
 var effect;
 
 function init() {
+    console.log('init');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     context = canvas.getContext('2d');
@@ -134,6 +135,14 @@ function init() {
     animate();
     layers_count++;
 }
+
+new MutationObserver((changes) => {
+    changes.forEach(change => {
+        if (change.attributeName.includes("src")) {
+            init();
+        }
+    })
+}).observe(document.getElementById(IMAGE_ID), {attributes: true});
 
 // main function
 function animate(){
@@ -150,7 +159,7 @@ resetBtn.addEventListener('click', function(){
     init();
     layers_count = 1;
     updateLayerCount(true);
-})
+});
 
 //add layer button
 const addLayerBtn = document.getElementById(ADD_LAYER_BTN);
@@ -168,6 +177,4 @@ function updateLayerCount(reset){
 addLayerBtn.addEventListener('click', function(){
     effect.init(context);
     updateLayerCount();
-})
-
-init();
+});
