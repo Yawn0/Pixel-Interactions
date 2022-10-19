@@ -14,15 +14,28 @@
 </head>
 <body>
     <!-- image converted to Base64 to prevent CORS problems -->
-    <div class="controls">
-        <button id="resetbutton">Reset</button>
-        <button id="addlayer">Add layer</button>
-        <input title="image" type="file" id="imageInput" onchange="onFileSelected(event)"/>
-    </div>
-    <div>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li class="logo">
+                <a type="button">
+                    <i></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" class="nav-button" id="resetbutton">Reset</a>
+            </li>
+            <li class="nav-item">
+                <a type="button" class="nav-button" id="addlayer">Add layer</a>
+            </li>
+            <li>
+                <input title="image" type="file" id="imageInput" onchange="onFileSelected(event)"/>
+            </li>
+        </ul>
+    </nav>
+    <main>
         <img alt="IMAGE NOT FOUND" id="image1" src="" >
         <canvas id="canvas1"></canvas>
-    </div>
+    </main>
 
 </body>
 </html>
